@@ -7,6 +7,11 @@ require('dotenv').config()
 
 app.use(express.json());
 
+
+app.get( "/", (req, res) => {
+    res.send("<h1>Hello World!</h1>");
+})
+
 app.post( "/users", async (req, res) => {
     await Users.create(req.body)
     .then(() => {
