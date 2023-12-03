@@ -31,10 +31,16 @@ app.post( "/users", async (req, res) => {
 })
 
 app.get("/users", async (_, res) => {
-    await Users.findAll()
+    const total = await Users.count()
+    await Users.findAll({
+        order: [
+            ['nome', 'asc']
+        ]
+    })
     .then((users) => {
         return res.json({
             erro: false,
+            total: total,
             users
         })
     })
